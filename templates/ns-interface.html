@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nursing Station</title>
+    <style>
+        .button {
+            width: 100px;
+            height: 50px;
+            background-color: gray;
+            color: white;
+            margin: 10px;
+            cursor: pointer;
+        }
+        .button.clicked {
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1>Nursing Station</h1>
+    <div>
+        <button id="button1" class="button" onclick="toggleColor(this)">Patient 1</button>
+        <button id="button2" class="button" onclick="toggleColor(this)">Patient 2</button>
+        <button id="button3" class="button" onclick="toggleColor(this)">Patient 3</button>
+        <button id="button4" class="button" onclick="toggleColor(this)">Patient 4</button>
+        <button id="button5" class="button" onclick="toggleColor(this)">Patient 5</button>
+    </div>
+
+    <script src="https://cdn.socket.io/4.0.1/socket.io.min.js"></script>
+    <script>
+        function toggleColor(button) {
+            button.classList.toggle('clicked');
+        }
+
+        var socket = io.connect('http://127.0.0.1:5000');
+
+        socket.on('connect', function() {
+            console.log('Websocket connected!');
+        });
+
+        socket.on('pressed', function(msg) {
+            console.log('Button press received:');
+            // Change the background color of the first button to green
+            var button = document.getElementById('button1');
+            var butt_col = {
+                'chat': 'blue',
+                'pain': 'red',
+                'drink': 'green',
+                'schedule': 'purple',
+                'orientation': 'orange'
+            };
+
+            if (button.style.backgroundColor != butt_col[msg]) {
+                button.style.backgroundColor = butt_col[msg];
+            } else {
+                button.style.backgroundColor = 'gray';
+            }    
+        });
+    </script>
+
+</body>
+</html>

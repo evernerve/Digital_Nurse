@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"name": "Digital_Nurse",
+			"path": "."
+		},
+		{
+			"name": "__pycache__",
+			"path": "../CareAModified/__pycache__"
+		},
+		{
+			"name": ".idea",
+			"path": "../CareAModified/.idea"
+		}
+	],
+	"settings": {}
+}
